@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
-Route::get('cereate', function () {
-    return view('cereate');
-})->name('cereate');
-Route::get('update', function () {
-    return view('update');
-});
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
+// Route::get('create', function () {
+//     return view('create');
+// })->name('create');
+// Route::get('update', function () {
+//     return view('update');
+// });
+
+// Route::get('create', [BarangController::class], 'index'); 
+Route::post('create-add',[BarangController::class,'store']);
+
+
+// barang : CRUD
+
+// read
+Route::get('/',[BarangController::class, 'index'])->name('home');
+
+// create
+Route::get('/create',[BarangController::class, 'create'])->name('create');
+Route::post('/create/save',[BarangController::class, 'createsave'])->name('createsave');
+
+// update
+Route::get('/update/{id}',[BarangController::class, 'update'])->name('update');
+Route::post('/update/save',[BarangController::class, 'updatesave'])->name('updatesave');
+// delete
+Route::get('/delete/{id}',[BarangController::class, 'delete'])->name('delete');
